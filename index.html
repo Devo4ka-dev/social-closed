@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="title">Project Closed</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body>
+    <div id="root">
+      <div class="Preview">
+        <div class="Brand__inner">
+          <div class="Brand__content">
+            <div class="Preview__title Brand__block">
+              <div class="Preview__title_text" data-i18n="title">
+                Project Closed
+              </div>
+              <div class="Preview__title_highlight" data-i18n="projectName">
+                social
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="Brand__section">
+        <div class="Brand__inner">
+          <div class="Brand__block">
+            <div class="Brand__content">
+              <div class="Brand__text">
+                <p style="margin-bottom: 20px" data-i18n="mainText"></p>
+                <p style="margin-bottom: 20px" data-i18n="thanksText"></p>
+                <p style="margin-bottom: 20px" data-i18n="dataText"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="adaptive-footer">
+      <div class="footer-container Brand__block">
+        <div class="footer-block left-block">
+          <span class="year">© 2025</span>
+          <a href="#" class="team-link" data-i18n="team"></a>
+        </div>
+        <div class="footer-block right-block">
+          <a
+            href="https://www.instagram.com/katydesigner_official"
+            class="designer-link"
+            target="_blank"
+            data-i18n="designer"
+          ></a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./languages.js"></script>
+    <script>
+      function setLanguage(language) {
+        const elements = document.querySelectorAll("[data-i18n]");
+        elements.forEach((element) => {
+          const key = element.getAttribute("data-i18n");
+          element.textContent = translations[language][key];
+        });
+        document.documentElement.lang = language;
+      }
+
+      // Определяем язык браузера
+      const browserLang = navigator.language.split("-")[0];
+      const supportedLanguages = ["ru", "uk", "en"];
+      const defaultLanguage = "en";
+
+      // Используем язык браузера, если он поддерживается, иначе используем английский
+      const currentLang = supportedLanguages.includes(browserLang)
+        ? browserLang
+        : defaultLanguage;
+
+      // Устанавливаем язык
+      setLanguage(currentLang);
+    </script>
+  </body>
+</html>
