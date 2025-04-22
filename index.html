@@ -67,15 +67,23 @@
         document.documentElement.lang = language;
       }
 
-      // Определяем язык браузера
-      const browserLang = navigator.language.split("-")[0];
-      const supportedLanguages = ["ru", "uk", "en"];
-      const defaultLanguage = "en";
+      // Получаем язык из URL параметра
+      const urlParams = new URLSearchParams(window.location.search);
+      const langParam = urlParams.get("lang");
 
-      // Используем язык браузера, если он поддерживается, иначе используем английский
-      const currentLang = supportedLanguages.includes(browserLang)
-        ? browserLang
-        : defaultLanguage;
+      // Проверяем корректность параметра языка
+      const supportedLanguages = ["ru", "uk", "en"];
+      let currentLang = "en"; // По умолчанию английский
+
+      if (langParam && supportedLanguages.includes(langParam)) {
+        currentLang = langParam;
+      } else if (!langParam) {
+        // Если параметр не указан, пробуем определить язык браузера
+        const browserLang = navigator.language.split("-")[0];
+        if (supportedLanguages.includes(browserLang)) {
+          currentLang = browserLang;
+        }
+      }
 
       // Устанавливаем язык
       setLanguage(currentLang);
